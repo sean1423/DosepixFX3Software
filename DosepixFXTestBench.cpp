@@ -428,10 +428,11 @@ void Test13() {
 	//This test is to be used for reading data from the FX3 device.
 	//Expecting Acknowledgement Byte (Pre-Defined on Page 34 Dosepix Manual) (8 bits)+ Data Payload (8 kiloBytes) + Finishing Byte (8 bits).
 	//Read from endpoint
-	//Differentiate between Acknowledgement Byte, Data and Finishing Byte.
-	//Use Acknowledgement Byte to Decipher what register data came from
-	//Is data MSB first? Does the data need to be reversed?
-	//
+	//Differentiate between Acknowledgement Byte, Data, and Finishing Byte.
+	//Use Acknowledgement Byte to decipher what register the data came from
+	//Is data MSB first? Does the data need to be reversed in order to be unerstood?
+	//Save Data to File?
+	
 
 }
 
