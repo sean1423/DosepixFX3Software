@@ -72,6 +72,20 @@ int Dosepix::HW_Finalise() {
 	return 0;
 }
 
+
+int Dosepix::HW_Chip_Write_DAC_DATA(){
+
+	LOG(DEBUG) << "Beginning DAC Data Writing"
+	myUSBDevice->DiscardBuffer();
+	unsigned short DAC_Data = BOOST_BINARY( 1111111111111111 ); // uses BOOST_BINARY to assign a 16 bit binary number to DAC_Data.
+	myUSBDevice->SetBuffer(DAC_Data, 16);
+	myUSBDevice->HW_TransmitData();
+	Sleep(100);
+
+
+}
+
+
 int Dosepix::HW_Chip_WriteOMR() {
 	LOG(DEBUG) << "";
 	LOG(DEBUG) << "We are in DosepixFX.cpp";
@@ -522,7 +536,8 @@ void Dosepix::SetDAC( int dacIndex, int value) {
 	for (int i = LSB; i <= MSB; i++) { this->peripheryDACRegister[i] = auxs->GetBitValue(value, i - LSB); }//
 	this->UpdateRawPeripheryDACRegister();
 }
-
+// This function is supposed to put the OMR data (pre-set) into a register.
+//
 void Dosepix::UpdateRawOMRRegister() {
 	if (verbose >= 2) cout << "\nINFO: [Dosepix::UpdateRaWOMR] Concatinating rawOMR...\n";
 	LOG(DEBUG) << "       THIS IS THE START OF UpdateRawOMRRegister";
@@ -536,7 +551,8 @@ void Dosepix::UpdateRawOMRRegister() {
 
 		LOG(DEBUG) << "Value of i: " << i;
 
-		for (int iBit = 0; iBit < 8; iBit++) { //looping through bits
+//		for (int iBit = 0; iBit < 8; iBit++) { //looping through bits
+		for (int iBit = 7; iBit < 8; iBit++) { //looping through bits
 
 			LOG(DEBUG) << "Value of iBit: " << iBit;
 
@@ -658,6 +674,7 @@ void Dosepix::PrintPixelConfig() {
 				std::cout << bitset<8>(this->pixelConfigMtrx[i][j]) << " ";
 			}
 			cout << std::endl;
+			LOG(DEBUG)  << "The PrintPixelConfig Function has just ended.";
 		}
 }
 

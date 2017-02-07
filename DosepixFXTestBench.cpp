@@ -8,6 +8,7 @@
 
 
 // #include <CyAPI.h>
+//#include <cyu3spi.h> dont know why this is here 1/2/17
 using namespace std;
 
 
@@ -233,7 +234,7 @@ void Test05() { // OMR test
 //	myDevice->HW_OMRHeader();
 //	myDevice->HW_Finalise();
 //	myDevice->HW_Initalise();
-//	myDevice->SetOMR_OperationMode(0);
+	myDevice->SetOMR_OperationMode(0);
 //	myDevice->SetOMR_OperationMode(1);
 //	myDevice->SetOMR_OperationMode(2);
 	//myDevice->SetOMR_OperationMode(3);
@@ -300,7 +301,7 @@ void Test05() { // OMR test
 	//myDevice->SetOMR_DisableColClkGate(0); // Chooses to enable column level clock gating
 	myDevice->SetOMR_DisableColClkGate(1); // Chooses to disable column level clock gating
 
-	//myDevice->SetOMR_Unassigned(0);
+	myDevice->SetOMR_Unassigned(0);
 
 	myDevice->PrintRawOMR(); // Prints Raw OMR Data to the console
 	myDevice->PrintOMR();    // Prints OMR Binary Data to the console
@@ -330,9 +331,9 @@ void Test08() {
 	bool TestBit_Digital[16][16];
 	for (int i = 0; i < 16; i++) { //loops the  rows
 		for (int j = 0; j < 16; j++) { //loops the columns
-			MaskBit[i][j] = 1;
-			TestBit_Analog[i][j] = 0;
-			TestBit_Digital[i][j] = 1;
+			MaskBit[i][j] = 0;
+			TestBit_Analog[i][j] = 1;
+			TestBit_Digital[i][j] = 0;
 		}
 	}
 	myDevice->SetPixelConfigBit(MaskBit, 2);
@@ -396,8 +397,6 @@ void Test11(){
 		}
 	}
 
-
-
 	//for (int th = 0; th < 1; th++) {
 //		myDevice->SetDigitalThreshold(0,  SingleDigitalThDCode);
 //		myDevice->SetDigitalThreshold(1,  SingleDigitalThDCode);
@@ -423,16 +422,13 @@ void Test11(){
 	myDevice->HW_Finalise();
 }
 
-
-void Test13() {
-	//This test is to be used for reading data from the FX3 device.
-	//Expecting Acknowledgement Byte (Pre-Defined on Page 34 Dosepix Manual) (8 bits)+ Data Payload (8 kiloBytes) + Finishing Byte (8 bits).
-	//Read from endpoint
-	//Differentiate between Acknowledgement Byte, Data, and Finishing Byte.
-	//Use Acknowledgement Byte to decipher what register the data came from
-	//Is data MSB first? Does the data need to be reversed in order to be unerstood?
-	//Save Data to File?
-	
+// Test 13 is used to configure the SPI block on the FX3 device and use MOSI, MISO, SCK and CS lines.
+void Test13()
+{
+	Dosepix* myDevice = new Dosepix(); //Creates a new class called Dosepix. myDevice points to this class.
+	myDevice->HW_Initalise(); //Arrow -> is used to access what a pointer points to.
+	myDevice->HW_Chip_Write_DAC_DATA();
+	myDevice->HW_Finalise();
 
 }
 
@@ -598,6 +594,7 @@ void Test13() {
 ////}
 
 
+// }
 int main(int argc, _TCHAR* argv[]) {
 	LOG(DEBUG) << "main";
 //	setvbuf(stdout, NULL, _IONBF, 0);
@@ -614,14 +611,14 @@ int main(int argc, _TCHAR* argv[]) {
 //	Test01();
 //	Test02(); // PeripheryDACRegister*/
 //	Test03(); // Header test
-//	Test04(); //Conatenating header and command data payload
+//	Test04(); //Concatenating header and command data payload
 	Test05(); // OMR test;
 //	Test06(); //OMR header test
 //	Test07(); // header+data payload take 2
 //	Test08(); // SetPixelConfigurationBits
-//	Test09(); // SetPixel trimming bits
 //	Test11(); //Set Single Digital Threshold
 //	Test12(); // bitwise operations
-//	Test13();
+	Test13(); //SPI Block Test
 	return 0;
 }
+
