@@ -612,7 +612,7 @@ int main(int argc, _TCHAR* argv[]) {
 //	Test02(); // PeripheryDACRegister*/
 //	Test03(); // Header test
 //	Test04(); //Concatenating header and command data payload
-	Test05(); // OMR test;
+//	Test05(); // OMR test;
 //	Test06(); //OMR header test
 //	Test07(); // header+data payload take 2
 //	Test08(); // SetPixelConfigurationBits
