@@ -432,9 +432,16 @@ void Test13()
 	unsigned char DAC_Data[2] = {0xFF,0xFF};//typedef unsigned char unit16_t output
 
 	FX3USB* myUSBDevice = new FX3USB();
+	LOG(DEBUG) << "Class has been called" ;
 	myUSBDevice->HW_Initalise();
+	LOG(DEBUG) << "Initialising" ;
+	LOG(DEBUG) << "" ;
 	myUSBDevice->SetBuffer(DAC_Data, 2);
+	LOG(DEBUG) << "Setting Buffer" ;
+	LOG(DEBUG) << "" ;
 	myUSBDevice->HW_TransmitData();
+	LOG(DEBUG) << "Transmitting" ;
+	LOG(DEBUG) << "" ;
 	myUSBDevice->HW_Finalise();
 
 }
@@ -621,13 +628,13 @@ int main(int argc, _TCHAR* argv[]) {
 //	Test02(); // PeripheryDACRegister*/
 //	Test03(); // Header test
 //	Test04(); //Concatenating header and command data payload
-	Test05(); // OMR test;
+//	Test05(); // OMR test;
 //	Test06(); //OMR header test
 //	Test07(); // header+data payload take 2
 //	Test08(); // SetPixelConfigurationBits
 //	Test11(); //Set Single Digital Threshold
 //	Test12(); // bitwise operations
-//	Test13(); //SPI Block Test
+	Test13(); //SPI Block Test
 	return 0;
 }
 

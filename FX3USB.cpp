@@ -92,6 +92,12 @@ int FX3USB::HW_Initalise() {
 			printf_s("\t\tEndpointAddress: 0x%x\n", USBDevice->EndPoints[inEndPointID]->Address);
 			LOG(INFO) << ":: FX3USB :: " << "EndpointAddress: " <<  std::hex << USBDevice->EndPoints[outEndPointID]->Address;
 		}
+		if ((USBDevice->EndPoints[iEP]->Address) == (UCHAR)(0x00)) {
+			outEndPointID = iEP;
+			USBEndPoint[outEndPointID] = (CCyUSBEndPoint*) USBDevice->EndPoints[outEndPointID];
+			printf_s("\t\tEndpointAddress: 0x%x\n", USBDevice->EndPoints[outEndPointID]->Address);
+			LOG(INFO) << ":: FX3USB :: " << "EndpointAddress: " <<  std::hex << USBDevice->EndPoints[outEndPointID]->Address;
+		}
 	}
 
 	// Testing that in and out end points are properly inialised and exit...
@@ -168,6 +174,8 @@ int FX3USB::HW_TransmitData() {
 	//long bufSize = sizeof(usbTxBuffer);
 
 	if (USBEndPoint[outEndPointID] != NULL) {
+		//if retcode = USBEndPoint[outEndPointID] = 0x00??
+		//_SETUP_PACKET is a struct and we need to put our vendor command data into it and send it to the command end point
 		retCode = USBEndPoint[outEndPointID]->XferData(this->usbTxBuffer, this->txBufferSize);
 		//printf_s("\tTxBuffer size: %d\n", this->txBufferSize);
 		LOG(DEBUG) << ":: FX3USB :: " << "txBufferSize: " << this->txBufferSize;
