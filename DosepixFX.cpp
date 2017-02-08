@@ -6,7 +6,7 @@
  *      Author:
  */
 
-#include "DosepixFX.h"
+#include "C:\Documents\eclipse\c++\DosepixFX.dll/DosepixFX.h"
 
 using namespace std;
 
@@ -73,17 +73,20 @@ int Dosepix::HW_Finalise() {
 }
 
 
-int Dosepix::HW_Chip_Write_DAC_DATA(){
-
-	LOG(DEBUG) << "Beginning DAC Data Writing"
-	myUSBDevice->DiscardBuffer();
-	unsigned short DAC_Data = BOOST_BINARY( 1111111111111111 ); // uses BOOST_BINARY to assign a 16 bit binary number to DAC_Data.
-	myUSBDevice->SetBuffer(DAC_Data, 16);
-	myUSBDevice->HW_TransmitData();
-	Sleep(100);
-
-
-}
+//int Dosepix::HW_Chip_Write_DAC_DATA(){
+//
+//	LOG(DEBUG) << "Beginning DAC Data Writing";
+//	myUSBDevice->DiscardBuffer();
+//	//unsigned short DAC_Data = BOOST_BINARY( 1111111111111111 ); // uses BOOST_BINARY to assign a 16 bit binary number to DAC_Data.
+//	unsigned char DAC_Data = 0xFFFF;
+//	LOG(DEBUG) << DAC_Data;
+//
+//	myUSBDevice->SetBuffer(DAC_Data, 16);
+//	myUSBDevice->HW_TransmitData();
+//	Sleep(100);
+//
+//
+//}
 
 
 int Dosepix::HW_Chip_WriteOMR() {

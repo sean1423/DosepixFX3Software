@@ -33,6 +33,7 @@
 #include "../FX3USB.dll/CommonFunctions.h"
 //#include "C:\\Documents\\eclipse\\c++\\FX3USB.dll\\easylogging++.h"
 
+
 #define DPX_FSR_LENGTH		128
 
 #define DPX_PIXCONFIG_BIT_MASK 			3
@@ -148,7 +149,7 @@ public:
 	int HW_Chip_DataReset(); 					/**< NOT IMPLEMENTED. This function performs Data Reset of the device. See definition in the manual. Page 21.*/
 
 	// Writing programming data to the chip. Page 25.
-	int HW_Chip_Write_DAC_DATA();				//   This function sends data from the computer to the FX3 in order to be sent via SPI.
+	//int HW_Chip_Write_DAC_DATA();				//   This function sends data from the computer to the FX3 in order to be sent via SPI.
 	int HW_Chip_WriteOMR(); 					/**< This function sets the Dosepix chip operation mode data.*/
 	int HW_Chip_SetConfigurationBits(); 		/**< This function sets configuration of each pixel: mask, analog and digital tests.*/
 	int HW_Chip_SetSingleDigitalThreshold();	/**< This function sets single digital threshold registers of the chip.*/

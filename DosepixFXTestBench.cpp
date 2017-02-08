@@ -12,8 +12,10 @@
 using namespace std;
 
 
-#include "../DosepixFX.dll/DosepixFX.h"
+//#include "../DosepixFX.dll/DosepixFX.h"
+#include "C:\Documents\eclipse\c++\DosepixFX.dll/DosepixFX.h"
 
+//#include "../"
 _INITIALIZE_EASYLOGGINGPP
 
 // adding stuff
@@ -163,6 +165,7 @@ void Test02() {
 //	myDevice->HW_Finalise();
 ////	myDevice->PrintRawFSR();
 //}
+
 
 /**
  *Header command + Data payload test
@@ -425,12 +428,18 @@ void Test11(){
 // Test 13 is used to configure the SPI block on the FX3 device and use MOSI, MISO, SCK and CS lines.
 void Test13()
 {
-	Dosepix* myDevice = new Dosepix(); //Creates a new class called Dosepix. myDevice points to this class.
-	myDevice->HW_Initalise(); //Arrow -> is used to access what a pointer points to.
-	myDevice->HW_Chip_Write_DAC_DATA();
-	myDevice->HW_Finalise();
+
+	unsigned char DAC_Data[2] = {0xFF,0xFF};//typedef unsigned char unit16_t output
+
+	FX3USB* myUSBDevice = new FX3USB();
+	myUSBDevice->HW_Initalise();
+	myUSBDevice->SetBuffer(DAC_Data, 2);
+	myUSBDevice->HW_TransmitData();
+	myUSBDevice->HW_Finalise();
 
 }
+
+
 
 
 //void process_buffer(unsigned char *txBuf, size_t, *rawOMR)
@@ -612,13 +621,13 @@ int main(int argc, _TCHAR* argv[]) {
 //	Test02(); // PeripheryDACRegister*/
 //	Test03(); // Header test
 //	Test04(); //Concatenating header and command data payload
-//	Test05(); // OMR test;
+	Test05(); // OMR test;
 //	Test06(); //OMR header test
 //	Test07(); // header+data payload take 2
 //	Test08(); // SetPixelConfigurationBits
 //	Test11(); //Set Single Digital Threshold
 //	Test12(); // bitwise operations
-	Test13(); //SPI Block Test
+//	Test13(); //SPI Block Test
 	return 0;
 }
 
