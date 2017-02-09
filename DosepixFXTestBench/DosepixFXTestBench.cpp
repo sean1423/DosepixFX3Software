@@ -438,12 +438,13 @@ void Test13()
 //	myUSBDevice->HW_Finalise();
 	//Commented out because made new functions to use the control endpoint
 
-	int command = 1; //Number 1 to 5 depending on what SPI function to test
+	int Command = 1; //Number 1 to 5 depending on what SPI function to test
 	unsigned char TestData[2] = {0xFF,0xFF};
+	LOG(DEBUG) << "TestData: " << TestData;
 	FX3USB* myUSBDevice = new FX3USB();
 	myUSBDevice->HW_Initalise();
-	myUSBDevice->SetusbControlEPSettings(TestData, Command);
-	myUSBDevice->HW_TransmitDataControlEP();
+	myUSBDevice->SetusbControlEPSettings(TestData, Command); // This function takes data to be sent to the FX3 and a number which designates what SPI function to use.
+	myUSBDevice->HW_TransmitDataControlEP(); // Transmits data to the Control Endpoint.
 	myUSBDevice->HW_Finalise();
 
 

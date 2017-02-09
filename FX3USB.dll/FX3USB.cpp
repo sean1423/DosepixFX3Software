@@ -230,8 +230,9 @@ int FX3USB::HW_TransmitDataControlEP()
 
 
 		retCode = USBEndPoint[0] -> XferData(this ->usbControlEPBuffer ,this ->usbControlEPBufferSize);
-
+		LOG(DEBUG) << "Transfer Complete. Data Transfered: " << usbControlEPBuffer;
 	}
+	LOG(DEBUG) << retCode;
 	return retCode;
 }
 
